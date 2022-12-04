@@ -11,37 +11,18 @@ class log_style:
 
 def p1(f):
     ans = 0
-    cal_list = []
-    cal = 0
     with open(f) as file:
         for line in file:
             line = line.strip()
-            if line:
-                cal += int(line)
-            else:
-                cal_list.append(cal)
-                cal = 0
-        cal_list.append(cal)
-        cal_list.sort(reverse=True)
-        ans = cal_list[0]
+
     return ans
 
 
 def p2(f):
     ans = 0
-    cal_list = []
-    cal = 0
     with open(f) as file:
         for line in file:
             line = line.strip()
-            if line:
-                cal += int(line)
-            else:
-                cal_list.append(cal)
-                cal = 0
-        cal_list.append(cal)
-        cal_list.sort(reverse=True)
-        ans = cal_list[0] + cal_list[1] + cal_list[2]
     return ans
 
 
