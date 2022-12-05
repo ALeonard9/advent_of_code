@@ -22,8 +22,8 @@ def import_path(path):
 def test_solution(s):
     if s == 1:
         infile = open(path_to_day+'ex_sol1.txt', 'r')
-        ex_ans = int(infile.readline())
-        result = sol.p1(path_to_day+'ex.txt')
+        ex_ans = str(infile.readline())
+        result = str(sol.p1(path_to_day+'ex.txt'))
         if result == ex_ans:
             logger.log('Problem 1 example passed.','good')
         else:
@@ -32,8 +32,8 @@ def test_solution(s):
             logger.log(msg,'info')
     elif s == 2:
         infile = open(path_to_day+'ex_sol2.txt', 'r')
-        ex_ans = int(infile.readline())
-        result = sol.p2(path_to_day+'ex.txt')
+        ex_ans = str(infile.readline())
+        result = str(sol.p2(path_to_day+'ex.txt'))
         if result == ex_ans:
             logger.log('Problem 2 example passed.','good')
         else:
