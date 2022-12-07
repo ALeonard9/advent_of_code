@@ -6,7 +6,7 @@ class log_style:
     ENDC = '\033[0m'
 
 
-def log(msg, style):
+def log(msg, style='warn'):
     match style:
         case 'good':
             print(log_style.OKGREEN + str(msg) + log_style.ENDC)
