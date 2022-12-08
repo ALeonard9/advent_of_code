@@ -53,7 +53,6 @@ def p1(f):
 def p2(f):
     ans = ''
     ship = {}
-    line_cnt = 0
     with open(f) as file:
         for line in file:
             if line[0] != 'm':
