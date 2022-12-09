@@ -7,7 +7,7 @@ import importlib.machinery
 def p1(f):
     ans = 0
     head = Knot('Head')
-    tail = Knot('Head')
+    tail = Knot('Tail')
     spots = []
     with open(f) as file:
         for line in file:
