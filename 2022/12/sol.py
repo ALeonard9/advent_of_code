@@ -78,7 +78,6 @@ def check_direction_down(map, coordinates):
 def ascend(map, start, end):
     visited = []
     heap = [(0, start[0], start[1])]
-    # print(heap)
 
     while True:
         if not heap:
