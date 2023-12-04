@@ -24,7 +24,8 @@ def test_solution(s):
     if s == 1:
         infile = open(path_to_day+'ex_sol1.txt', 'r')
         ex_ans = str(infile.readline())
-        result = str(sol.p1(path_to_day+'ex.txt'))
+        path_to_data = path_to_day+'ex_data1.txt'
+        result = str(sol.p1(path_to_data))
         if result == ex_ans:
             logger.log('Problem 1 example passed.', 'good')
         else:
@@ -34,7 +35,10 @@ def test_solution(s):
     elif s == 2:
         infile = open(path_to_day+'ex_sol2.txt', 'r')
         ex_ans = str(infile.readline())
-        result = str(sol.p2(path_to_day+'ex.txt'))
+        path_to_data = path_to_day+'ex_data2.txt'
+        if os.path.getsize(path_to_data) <= 0:
+            path_to_data = path_to_day+'ex_data1.txt'
+        result = str(sol.p2(path_to_data))
         if result == ex_ans:
             logger.log('Problem 2 example passed.', 'good')
         else:
@@ -77,10 +81,15 @@ if __name__ == '__main__':
 
     if int(arg.problem) == 1:
         test_solution(1)
-        if not arg.suppress: print('Problem 1 solution:', sol.p1(path_to_day+'in.txt'))
+        input_data = 'in_data1.txt'
+        if not arg.suppress: print('Problem 1 solution:', sol.p1(path_to_day+input_data))
     elif int(arg.problem) == 2:
         test_solution(2)
-        if not arg.suppress: print('Problem 2 solution:', sol.p2(path_to_day+'in.txt'))
+        input_data = 'in_data2.txt'
+        path_to_data = path_to_day+input_data
+        if os.path.getsize(path_to_data) <= 0:
+            path_to_data = path_to_day+'in_data1.txt'
+        if not arg.suppress: print('Problem 2 solution:', sol.p2(path_to_data))
     else:
         raise AssertionError(
             'Incorrect argument passed. Please send 1 or 2 for the problem you are trying to solve.')
