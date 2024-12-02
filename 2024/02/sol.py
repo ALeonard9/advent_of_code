@@ -39,44 +39,70 @@ def p1(f):
 
 def p2(f):
     ans = 0
+    rerun = []
     with open(f) as file:
         for line in file:
             line = line.strip()
             report = []
             report = list(map(int, line.split()))
-            ans += check_report(report)
+
+            good = check_report(report)
+            if good == 1:
+                ans += 1
+            else:
+                rerun.append(report)
+
+        for report in rerun:
+            good = check_report_w_failures(report)
+            if good == 1:
+                ans += 1
 
     return ans
 
 
 def check_report(report):
     good = 0
-    report_meta = {"direction": "unknown", "failures": 0, "first_fail": False}
+    report_meta = {
+        "direction": "unknown",
+        "failed": False,
+    }
     for i in range(1, len(report)):
         report_meta = check_pairs(report[i - 1], report[i], report_meta)
-        if report_meta["first_fail"]:
-            if i + 1 < len(report):
-                report_meta = check_pairs(report[i - 1], report[i + 1], report_meta)
-    if report_meta["failures"] <= 1:
+    if report_meta["failed"] == False:
         good = 1
+
+    return good
+
+
+def check_report_w_failures(report):
+    good = 0
+    for i in range(0, len(report)):
+        temp_report = report.copy()
+        temp_report.pop(i)
+        good = check_report(temp_report)
+        if good == 1:
+            break
+
     return good
 
 
 def check_pairs(first, second, report_meta):
     if abs(first - second) >= 4 or abs(first - second) == 0:
-        report_meta["failures"] += 1
-        report_meta["first_fail"] = True
+        report_meta["failed"] = True
+        return report_meta
     if first < second and report_meta["direction"] == "unknown":
         report_meta["direction"] = "up"
-    elif first > second and report_meta == "unknown":
+        return report_meta
+    elif first > second and report_meta["direction"] == "unknown":
         report_meta["direction"] = "down"
+        return report_meta
     else:
         if first < second and report_meta["direction"] == "down":
-            report_meta["failures"] += 1
-            report_meta["first_fail"] = True
+            report_meta["failed"] = True
+            return report_meta
         elif first > second and report_meta["direction"] == "up":
-            report_meta["failures"] += 1
-            report_meta["first_fail"] = True
+            report_meta["failed"] = True
+            return report_meta
     return report_meta
 
 
