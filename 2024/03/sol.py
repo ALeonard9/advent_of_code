@@ -17,22 +17,21 @@ def p1(f):
 
 def p2(f):
     ans = 0
+    string = ""
     with open(f) as file:
         for line in file:
             line = line.strip()
-            split_result = split_on_do_and_dont(line)
-            # print(split_result)
+            string += line
+    split_result = split_on_do_and_dont(string)
+    add = True
+    for part in split_result:
+        if part == "do()":
             add = True
-            for part in split_result:
-                if part == "do()":
-                    add = True
-                elif part == "don't()":
-                    add = False
-                else:
-                    if add:
-                        # print(part)
-                        ans += find_mul(part)
-                        # print(ans)
+        elif part == "don't()":
+            add = False
+        else:
+            if add:
+                ans += find_mul(part)
     return ans
 
 
@@ -42,9 +41,7 @@ def find_mul(line):
     matches = re.findall(pattern, line)
     for match in matches:
         x, y = re.match(r"mul\((\d{1,3}),(\d{1,3})\)", match).groups()
-        # print(x, y)
         ans += int(x) * int(y)
-    print("answer:", ans)
     return ans
 
 
